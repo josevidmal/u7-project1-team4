@@ -1,6 +1,6 @@
 # u7-project1-team4
 
-Team memebers:
+Team members:
 - Jose Vidal
 - Mario Colunga
 - Jorge Bernal
