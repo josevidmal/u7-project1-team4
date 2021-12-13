@@ -8,7 +8,7 @@
 
 .container-custom {
     /*margin:0;*/
-    padding:15px;
+     padding:5px;
     /*background:darkgrey;*/
     
 }
@@ -21,7 +21,7 @@
     font-size: 30px;
   }
 
-  .aside-boxes{
+.aside-boxes{
     padding:5px;
     background:darkgrey;
     border-radius:5px;
@@ -30,14 +30,21 @@
     margin-bottom:5px;
 }
 
+.aside-section{
+    display: flex;
+    flex: row;
+    justify-content: space-around;
+    flex-direction: column;
+}
+
 .form-custom{
     padding:5px;
     background:#e0e0e0;
     border-radius:5px;
     border:solid 1px;
-    margin-top:5px;
+    /*margin-top:5px;
     margin-bottom:5px;
-    margin:1px;  
+    margin:1px;  */
 }
 
 .display-information-box{
@@ -48,3 +55,4 @@
     margin-top:5px;
     margin-bottom:5px;   
 }
+
