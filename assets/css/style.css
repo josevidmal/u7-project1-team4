@@ -56,3 +56,6 @@
     margin-bottom:5px;   
 }
 
+#basic-info {
+    white-space: pre-line;
+}
