@@ -70,6 +70,9 @@
 
 
                     <div class="display-information-box">
+                        <div id="mapi" style="display:none"><!-- div for google map api-->
+
+                        </div>
                         <p>Some information about the country you might be interested in</p>
                         <p>We help you to determine your budget for your next holidays</p>
                         <p>We care about your wellness and safety so check the covid levels with our calculator</p>
@@ -108,7 +111,12 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="assets/js/script.js"></script>
-    
+        
+        <!-- Google Maps API -->
+        <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+        <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6O2RWQkdjXJXTCNIsjBwXUzxeQDCF0Lc&callback=initMap&libraries=places&language=en"         
+        ></script>
     </body>
 
 </html>
