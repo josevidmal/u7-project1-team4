@@ -7,6 +7,7 @@ var covidCasesEl = document.getElementById("covid-cases");
 var covidRateEl = document.getElementById("covid-rate");
 var covidDeathsEl = document.getElementById("covid-deaths");
 var mapiDiv = document.getElementById("mapi");
+var buttonsDivEl = document.getElementById("buttons-div");
 
 //initial values from Mexico
 var lat = 23;
@@ -30,6 +31,8 @@ fetch(restCountriesQuery)
         mapiDiv.style.display = "block";
         getBasicInfo(data);
     })
+
+renderHistoryBtns();
 })
 
 function getBasicInfo(data) {
@@ -169,3 +172,41 @@ function searchMap(lat,lng) {
     //var autocomplete1 = new  google.maps.places.Autocomplete(destinationInputEl,options);
 
   }
+
+function renderHistoryBtns () {
+    var localStorageContent = localStorage.getItem("countries");
+
+    var countries;
+    if (localStorageContent === null) {
+        countries = [];
+    } else {
+        countries = JSON.parse(localStorageContent);
+    }
+
+    countries.unshift(destinationInputEl.value);
+    var countriesSliced = countries.slice(0, 7);
+
+    localStorage.setItem("countries", JSON.stringify(countriesSliced));
+
+    var lastSearch = JSON.parse(localStorage.getItem("countries"));
+
+    if (lastSearch !== null) {
+        var newBtn = document.createElement("button");
+        newBtn.setAttribute("class", "history-btns");
+        newBtn.setAttribute("value", lastSearch[0]);
+        newBtn.textContent = lastSearch[0];
+    } else {
+        return;
+    }
+
+    if (buttonsDivEl.hasChildNodes()) {
+        buttonsDivEl.insertBefore(newBtn, buttonsDivEl.children[0]);
+    } else {
+        buttonsDivEl.appendChild(newBtn);
+    }
+
+    if (lastSearch.length > 6) {
+        buttonsDivEl.removeChild(buttonsDivEl.children[6]);
+    }
+
+}
