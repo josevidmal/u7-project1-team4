@@ -66,3 +66,25 @@
     width: 100%;
     /* The width is the width of the web page */
   }
+
+  #buttons-div {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-content: flex-start;
+      gap: 5px;
+  }
+
+  .history-btns {
+      flex: 0 0 45%;
+      border: solid 1px black;
+      background-color: lightgreen;
+      border-radius: 5px;
+      height: 30px;
+      font-weight: bold;
+  }
+
+  .history-btns:hover {
+      background-color: lime;
+      cursor: pointer;
+  }
