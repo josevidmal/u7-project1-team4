@@ -63,14 +63,16 @@ function Exchangerate(data){
     fetch(alphaQuery)
     .then(function(responsecurrency) {
         return responsecurrency.json();
-
-
-
     })
     .then(function(datacurrency) {
         console.log(datacurrency);
-        exchangeEl.textContent = datacurrency["Realtime Currency Exchange Rate"]["5. Exchange Rate"]
-})
+        var currencyDecimals = datacurrency["Realtime Currency Exchange Rate"]["5. Exchange Rate"];
+        var currencyWoDecimals = (Number(currencyDecimals).toFixed(3));
+        exchangeEl.textContent = "1 USD = " + currencyWoDecimals + " " + currencyrate;
+
+        var exchangeTitle = document.getElementById("exchange-title");
+        exchangeTitle.textContent = " Exchange Rate";
+    })
 
    
 }
