@@ -2,7 +2,7 @@ var searchBtn = document.querySelector(".button");
 var destinationInputEl = document.getElementById("inputDestination");
 var basicInfoEl = document.getElementById("basic-info");
 var currencyEl = document.getElementById("currency");
-var exchangeEl = document.getElementById("exchange");
+var exchangeEl = document.getElementById("exchange-rate");
 var covidCasesEl = document.getElementById("covid-cases");
 var covidRateEl = document.getElementById("covid-rate");
 var covidDeathsEl = document.getElementById("covid-deaths");
@@ -45,17 +45,38 @@ function getBasicInfo(data) {
     basicInfoTitle.appendChild(flagIcon);
 
     //Basic Info
-    basicInfoEl.textContent = "Official Name: " + data[0].altSpellings[2] + "\r\n Capital: " + data[0].capital + "\r\n Language: " + data[0].languages[0].name;
-    
+    basicInfoEl.textContent = "Region: " + data[0].subregion + "\r\n Capital: " + data[0].capital + "\r\n Language: " + data[0].languages[0].name;
+    console.log(basicInfoEl);
     //Currency Info
     var currencyElTitle = document.getElementById("currency-title");
     currencyElTitle.textContent = data[0].currencies[0].name;
     
     // currencyEl is the element containg the code for the currency exchange
     currencyEl.textContent = data[0].currencies[0].code;
+    Exchangerate(data);
 }
 
-var alphaQuery = "https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=JPY&apikey=demo";
+function Exchangerate(data){ 
+    var apikey = "60MP74RUOD4MUHKI"
+    var currencyrate = data[0].currencies[0].code
+    var alphaQuery = "https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency=USD&to_currency=" + currencyrate + "&apikey=" + apikey;
+    fetch(alphaQuery)
+    .then(function(responsecurrency) {
+        return responsecurrency.json();
+
+
+
+    })
+    .then(function(datacurrency) {
+        console.log(datacurrency);
+        exchangeEl.textContent = datacurrency["Realtime Currency Exchange Rate"]["5. Exchange Rate"]
+})
+
+   
+}
+
+
+
 
 
 function searchLatLongCity(city){
@@ -146,4 +167,3 @@ function searchMap(lat,lng) {
     //var autocomplete1 = new  google.maps.places.Autocomplete(destinationInputEl,options);
 
   }
-  
