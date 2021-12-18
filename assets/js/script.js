@@ -9,6 +9,8 @@ var covidDeathsEl = document.getElementById("covid-deaths");
 var mapiDiv = document.getElementById("mapi");
 var buttonsDivEl = document.getElementById("buttons-div");
 
+init();
+
 //initial values from Mexico
 var lat = 23;
 var lng = -102;
@@ -208,5 +210,29 @@ function renderHistoryBtns () {
     if (lastSearch.length > 6) {
         buttonsDivEl.removeChild(buttonsDivEl.children[6]);
     }
+}
 
+function init() {
+    loadHistoryBtns();
+}
+
+function loadHistoryBtns() {
+
+    var lastSearch = JSON.parse(localStorage.getItem("countries"));
+
+    if (lastSearch !== null) {
+        for (var i = 0; i < 6; i++) {
+            var newBtn = document.createElement("button");
+            newBtn.setAttribute("class", "history-btns");
+            newBtn.setAttribute("value", lastSearch[i]);
+            newBtn.textContent = lastSearch[i];
+            buttonsDivEl.appendChild(newBtn);
+            var btnValue = newBtn.getAttribute("value");
+            if (btnValue === "undefined") {
+                newBtn.setAttribute("style", "display: none");
+            }
+        }
+    } else {
+        return;
+    } 
 }

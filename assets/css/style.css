@@ -70,14 +70,15 @@
   #buttons-div {
       display: flex;
       flex-wrap: wrap;
-      justify-content: flex-start;
+      justify-content: center;
       align-content: flex-start;
       gap: 5px;
+      margin-top: 5px;
+      margin-bottom: 5px;
   }
 
   .history-btns {
       flex: 0 0 45%;
-      border: solid 1px black;
       background-color: lightgreen;
       border-radius: 5px;
       height: 30px;
@@ -88,3 +89,7 @@
       background-color: lime;
       cursor: pointer;
   }
+
+  .history-btns:active {
+    box-shadow: 0px 0px 10px 5px deepskyblue;
+}
