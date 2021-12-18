@@ -13,6 +13,38 @@ var buttonsDivEl = document.getElementById("buttons-div");
 var lat = 23;
 var lng = -102;
 
+
+// jquery function--> Search Countries for autocomplete
+$( function() {
+    var availableCities = searchCitiesAuto();    
+    $( "#inputDestination" ).autocomplete({
+      source: availableCities
+    });
+  } );
+
+//searching function use for autcomplete
+function searchCitiesAuto(){
+
+    var queryCountries = "https://restcountries.com/v3.1/all";
+    var availableTags = [];
+
+    fetch(queryCountries)
+    .then(function (responseC) {
+        return responseC.json();
+    })
+    .then(function(dataC) {
+        //console.log(dataC); 
+        //console.log('Length dataC ',dataC.length);  
+        for (let i = 0; i < dataC.length; i++) {
+            //console.log('Country ',i,' ',dataC[i].name.common);
+            availableTags.push(dataC[i].name.common);
+        }     
+    });
+    return availableTags;
+}
+
+
+
 searchBtn.addEventListener("click", function(event) {
     event.preventDefault();
     
