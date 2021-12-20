@@ -207,6 +207,7 @@ function searchMap(lat,lng) {
 
   }
 
+//funtion to render a history button per country search (up to 6 buttons)
 function renderHistoryBtns () {
     var localStorageContent = localStorage.getItem("countries");
 
@@ -244,6 +245,7 @@ function renderHistoryBtns () {
     }
 }
 
+//init() function to keep history buttons when app is reloaded
 function init() {
     loadHistoryBtns();
 }
@@ -268,3 +270,23 @@ function loadHistoryBtns() {
         return;
     } 
 }
+
+//click event function to call data for history buttons
+buttonsDivEl.addEventListener("click", function(event) {
+
+    var country = event.target.value;
+    var restCountriesQuery = "https://restcountries.com/v2/name/" + country;
+
+    //initMap();
+    searchLatLongCity(country);
+
+    fetch(restCountriesQuery)
+        .then(function (response1) {
+            return response1.json();
+        })
+        .then(function(data) {
+            console.log(data);
+            mapiDiv.style.display = "block";
+            getBasicInfo(data);
+    })
+});
