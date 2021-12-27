@@ -91,6 +91,7 @@ function getBasicInfo(data) {
     // currencyEl is the element containg the code for the currency exchange
     currencyEl.textContent = data[0].currencies[0].code;
     Exchangerate(data);
+    covidInfo();
 }
 
 function Exchangerate(data){ 
@@ -212,6 +213,41 @@ function searchMap(lat,lng) {
 
   }
 
+//test function to get COVID-19 data
+function covidInfo() {
+    
+    var covidCasesTitle = document.getElementById("covid-cases-title");
+    covidCasesTitle.textContent = "COVID-19 Cases";
+    var covidRateTitle = document.getElementById("covid-rate-title");
+    covidRateTitle.textContent = "COVID-19 Rates";
+    var covidDeathsTitle = document.getElementById("covid-deaths-title");
+    covidDeathsTitle.textContent = "COVID-19 Deaths"
+
+    var country = destinationInputEl.value;
+    var covidQuery = "https://disease.sh/v3/covid-19/countries/" + country + "?yesterday=yesterday";
+
+    fetch(covidQuery)
+        .then(function(covidResponse) {
+            return covidResponse.json();
+        })
+        .then(function(covidData) {
+            console.log(covidData);
+
+            var covidCases = covidData.cases;
+            var covidActive = covidData.active;
+            var covidCasesRate = covidData.casesPerOneMillion;
+            var covidActiveRate = covidData.activePerOneMillion;
+            var covidDeathsRate = covidData.deathsPerOneMillion;
+            var covidDeaths = covidData.deaths;
+            console.log(covidCases, covidCasesRate, covidDeaths);
+
+            covidCasesEl.innerHTML = "Total Cases: " + covidCases.toLocaleString("en-US") + "<br>" + "Active Cases: " + covidActive.toLocaleString("en-US");
+            covidRateEl.innerHTML = "Cases Per Million: " + covidCasesRate.toLocaleString("en-US") + "<br>" + "Active Per Million: " + covidActiveRate.toLocaleString("en-US") + "<br>" + "Deaths Per Million: " + covidDeathsRate.toLocaleString("en-US");
+            covidDeathsEl.innerHTML = "Total Deaths: " + covidDeaths.toLocaleString("en-US");
+        })
+
+}
+
 //funtion to render a history button per country search (up to 6 buttons)
 function renderHistoryBtns () {
     var localStorageContent = localStorage.getItem("countries");
@@ -292,6 +328,57 @@ buttonsDivEl.addEventListener("click", function(event) {
         .then(function(data) {
             console.log(data);
             mapiDiv.style.display = "block";
-            getBasicInfo(data);
-    })
+
+            var basicInfoTitle = document.getElementById("basic-info-title");
+            basicInfoTitle.textContent = data[0].name + "   ";
+
+            //add flag icon
+            var flagIconUrl = data[0].flag;
+            var flagIcon = document.createElement("img");
+            flagIcon.src = flagIconUrl;
+            flagIcon.setAttribute('width', '50px');
+            flagIcon.setAttribute('height', '50px');
+            basicInfoTitle.appendChild(flagIcon);
+
+            //Basic Info
+            basicInfoEl.textContent = "Region: " + data[0].subregion + "\r\n Capital: " + data[0].capital + "\r\n Language: " + data[0].languages[0].name;
+            console.log(basicInfoEl);
+            //Currency Info
+            var currencyElTitle = document.getElementById("currency-title");
+            currencyElTitle.textContent = data[0].currencies[0].name;
+    
+            // currencyEl is the element containg the code for the currency exchange
+            currencyEl.textContent = data[0].currencies[0].code;
+            Exchangerate(data);
+
+            //test function to get COVID-19 data with history buttons
+            var covidCasesTitle = document.getElementById("covid-cases-title");
+            covidCasesTitle.textContent = "COVID-19 Cases";
+            var covidRateTitle = document.getElementById("covid-rate-title");
+            covidRateTitle.textContent = "COVID-19 Rates";
+            var covidDeathsTitle = document.getElementById("covid-deaths-title");
+            covidDeathsTitle.textContent = "COVID-19 Deaths"
+
+            var covidQuery = "https://disease.sh/v3/covid-19/countries/" + country + "?yesterday=yesterday";
+
+            fetch(covidQuery)
+                .then(function(covidResponse) {
+                    return covidResponse.json();
+                })
+                .then(function(covidData) {
+                    console.log(covidData);
+
+                    var covidCases = covidData.cases;
+                    var covidActive = covidData.active;
+                    var covidCasesRate = covidData.casesPerOneMillion;
+                    var covidActiveRate = covidData.activePerOneMillion;
+                    var covidDeathsRate = covidData.deathsPerOneMillion;
+                    var covidDeaths = covidData.deaths;
+                    console.log(covidCases, covidCasesRate, covidDeaths);
+
+                    covidCasesEl.innerHTML = "Total Cases: " + covidCases.toLocaleString("en-US") + "<br>" + "Active Cases: " + covidActive.toLocaleString("en-US");
+                    covidRateEl.innerHTML = "Cases Per Million: " + covidCasesRate.toLocaleString("en-US") + "<br>" + "Active Per Million: " + covidActiveRate.toLocaleString("en-US") + "<br>" + "Deaths Per Million: " + covidDeathsRate.toLocaleString("en-US");
+                    covidDeathsEl.innerHTML = "Total Deaths: " + covidDeaths.toLocaleString("en-US");
+                })
+        })
 });
