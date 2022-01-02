@@ -8,6 +8,8 @@ var covidRateEl = document.getElementById("covid-rate");
 var covidDeathsEl = document.getElementById("covid-deaths");
 var mapiDiv = document.getElementById("mapi");
 var buttonsDivEl = document.getElementById("buttons-div");
+var asideSectionEl = document.querySelectorAll(".aside-section");
+var displayInfoBoxEl = document.querySelector(".display-information-box");
 
 init();
 
@@ -64,6 +66,10 @@ fetch(restCountriesQuery)
         console.log(data);
         mapiDiv.style.display = "block";
         getBasicInfo(data);
+        for (var i = 0; i < asideSectionEl.length; i++) {
+        asideSectionEl[i].setAttribute("style", "visibility: visible");
+        }
+        displayInfoBoxEl.setAttribute("style", "visibility: visible");
     })
 
 renderHistoryBtns();
@@ -381,4 +387,9 @@ buttonsDivEl.addEventListener("click", function(event) {
                     covidDeathsEl.innerHTML = "Total Deaths: " + covidDeaths.toLocaleString("en-US");
                 })
         })
+    
+    for (var i = 0; i < asideSectionEl.length; i++) {
+        asideSectionEl[i].setAttribute("style", "visibility: visible");
+    }
+    displayInfoBoxEl.setAttribute("style", "visibility: visible");
 });
