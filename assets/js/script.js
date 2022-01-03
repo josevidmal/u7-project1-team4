@@ -93,6 +93,10 @@ function getBasicInfo(data) {
     //Currency Info
     var currencyElTitle = document.getElementById("currency-title");
     currencyElTitle.textContent = data[0].currencies[0].name;
+
+    //Population variable for Map
+    var populationEl = data[0].population;
+    console.log("population: " + populationEl);
     
     // currencyEl is the element containg the code for the currency exchange
     currencyEl.textContent = data[0].currencies[0].code;
