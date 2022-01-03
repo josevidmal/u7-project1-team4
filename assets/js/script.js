@@ -10,6 +10,8 @@ var mapiDiv = document.getElementById("mapi");
 var buttonsDivEl = document.getElementById("buttons-div");
 var asideSectionEl = document.querySelectorAll(".aside-section");
 var displayInfoBoxEl = document.querySelector(".display-information-box");
+var covidDeathsFlag = "";
+var populationFlag = "";
 
 init();
 
@@ -42,7 +44,8 @@ function searchCitiesAuto(){
         for (let i = 0; i < dataC.length; i++) {
             //console.log('Country ',i,' ',dataC[i].name.common);
             availableTags.push(dataC[i].name.common);
-        }     
+        } 
+        availableTags.push('United States of America') 
     });
     return availableTags;
 }
@@ -55,8 +58,8 @@ searchBtn.addEventListener("click", function(event) {
 var country = destinationInputEl.value;
 var restCountriesQuery = "https://restcountries.com/v2/name/" + country;
 
-//initMap();
-searchLatLongCity(country);
+//initMap(); call the map
+//searchLatLongCity(country);
 
 fetch(restCountriesQuery)
     .then(function (response1) {
@@ -70,6 +73,13 @@ fetch(restCountriesQuery)
         asideSectionEl[i].setAttribute("style", "visibility: visible");
         }
         displayInfoBoxEl.setAttribute("style", "visibility: visible");
+
+        populationFlag = data[0].population;
+        console.log('population: ',populationFlag);
+
+        //initMap(); call the map
+        searchLatLongCity(country,populationFlag);
+
     })
 
 renderHistoryBtns();
@@ -134,7 +144,7 @@ function covidCasesEl(data){
 }
 
 
-function searchLatLongCity(city){
+function searchLatLongCity(city,population){
 
     var resGeocodingMaps = "https://maps.googleapis.com/maps/api/geocode/json?address="+city+"&key=AIzaSyD6O2RWQkdjXJXTCNIsjBwXUzxeQDCF0Lc";
 
@@ -148,7 +158,7 @@ function searchLatLongCity(city){
         lng = dataMaps.results[0].geometry.location.lng;
         console.log('Latitud: ',lat);
         console.log('Longitud: ',lng);
-        searchMap(lat,lng);
+        searchMap(lat,lng,population);
         //getBasicInfo(data);
     })
 
@@ -173,7 +183,7 @@ function initMap() {
     });
 
     var infoWindow = new google.maps.InfoWindow({
-        content: '<h4>Data: </h4>'
+        content: '<h4>Population: '+ populationFlag.toLocaleString() + '</h4>'
     });
 
     marker.addListener('click',function(){
@@ -190,7 +200,7 @@ function initMap() {
 
 
 // Initialize and add the map
-function searchMap(lat,lng) {
+function searchMap(lat,lng,population) {
     // The location of Uluru
     const citySearch = { lat: lat, lng: lng };
     // The map, centered at Uluru
@@ -208,7 +218,7 @@ function searchMap(lat,lng) {
     });
 
     var infoWindow = new google.maps.InfoWindow({
-        content: '<h4>Data: </h4>'
+        content: '<h4>Population: ' + population.toLocaleString() + '</h4>'
     });
 
     marker.addListener('click',function(){
@@ -266,33 +276,44 @@ function renderHistoryBtns () {
     if (localStorageContent === null) {
         countries = [];
     } else {
+
         countries = JSON.parse(localStorageContent);
     }
 
-    countries.unshift(destinationInputEl.value);
-    var countriesSliced = countries.slice(0, 7);
-
-    localStorage.setItem("countries", JSON.stringify(countriesSliced));
-
-    var lastSearch = JSON.parse(localStorage.getItem("countries"));
-
-    if (lastSearch !== null) {
-        var newBtn = document.createElement("button");
-        newBtn.setAttribute("class", "history-btns");
-        newBtn.setAttribute("value", lastSearch[0]);
-        newBtn.textContent = lastSearch[0];
-    } else {
-        return;
+    //if the value exist into the array dont save
+    var positionCountrieArray = jQuery.inArray(destinationInputEl.value,countries);
+    //console.log('City array position: ',positionCityArray);
+    if  (positionCountrieArray !== -1){
+        //dont do anything
+        console.log('The countrie exist on the localstorage');
     }
 
-    if (buttonsDivEl.hasChildNodes()) {
-        buttonsDivEl.insertBefore(newBtn, buttonsDivEl.children[0]);
-    } else {
-        buttonsDivEl.appendChild(newBtn);
-    }
+    else {
+        countries.unshift(destinationInputEl.value);
+        var countriesSliced = countries.slice(0, 7);
 
-    if (lastSearch.length > 6) {
-        buttonsDivEl.removeChild(buttonsDivEl.children[6]);
+        localStorage.setItem("countries", JSON.stringify(countriesSliced));
+
+        var lastSearch = JSON.parse(localStorage.getItem("countries"));
+
+        if (lastSearch !== null) {
+            var newBtn = document.createElement("button");
+            newBtn.setAttribute("class", "history-btns");
+            newBtn.setAttribute("value", lastSearch[0]);
+            newBtn.textContent = lastSearch[0];
+        } else {
+            return;
+        }
+
+        if (buttonsDivEl.hasChildNodes()) {
+            buttonsDivEl.insertBefore(newBtn, buttonsDivEl.children[0]);
+        } else {
+            buttonsDivEl.appendChild(newBtn);
+        }
+
+        if (lastSearch.length > 6) {
+            buttonsDivEl.removeChild(buttonsDivEl.children[6]);
+        }
     }
 }
 
@@ -324,12 +345,12 @@ function loadHistoryBtns() {
 
 //click event function to call data for history buttons
 buttonsDivEl.addEventListener("click", function(event) {
-
+    event.preventDefault();
     var country = event.target.value;
     var restCountriesQuery = "https://restcountries.com/v2/name/" + country;
 
     //initMap();
-    searchLatLongCity(country);
+    //searchLatLongCity(country);
 
     fetch(restCountriesQuery)
         .then(function (response1) {
@@ -356,7 +377,14 @@ buttonsDivEl.addEventListener("click", function(event) {
             //Currency Info
             var currencyElTitle = document.getElementById("currency-title");
             currencyElTitle.textContent = data[0].currencies[0].name;
-    
+            
+            populationFlag = data[0].population;
+            console.log('population: ',populationFlag);
+            
+            //call the map
+            searchLatLongCity(country,populationFlag);
+
+
             // currencyEl is the element containg the code for the currency exchange
             currencyEl.textContent = data[0].currencies[0].code;
             Exchangerate(data);
@@ -384,6 +412,7 @@ buttonsDivEl.addEventListener("click", function(event) {
                     var covidActiveRate = covidData.activePerOneMillion;
                     var covidDeathsRate = covidData.deathsPerOneMillion;
                     var covidDeaths = covidData.deaths;
+                    var covidPopulation = covidData.population;                    
                     console.log(covidCases, covidCasesRate, covidDeaths);
 
                     covidCasesEl.innerHTML = "Total Cases: " + covidCases.toLocaleString("en-US") + "<br>" + "Active Cases: " + covidActive.toLocaleString("en-US");
