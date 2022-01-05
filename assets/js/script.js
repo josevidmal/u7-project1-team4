@@ -111,6 +111,7 @@ function getBasicInfo(data) {
     // currencyEl is the element containg the code for the currency exchange
     currencyEl.textContent = data[0].currencies[0].code;
     Exchangerate(data);
+    safetyInfo(data);
     covidInfo();
 }
 
@@ -130,9 +131,45 @@ function Exchangerate(data){
 
         var exchangeTitle = document.getElementById("exchange-title");
         exchangeTitle.textContent = " Exchange Rate";
-    })
+    })   
+}
 
-   
+//Function to get covid situation summary, covid policy and covid hotspots
+function safetyInfo(data) {
+    var countryCode = data[0].alpha2Code;
+    var covidSafetyQuery = "https://test.api.amadeus.com/v1/duty-of-care/diseases/covid19-area-report?countryCode=" + countryCode;
+
+    var summaryTitle = document.getElementById("summary-title");
+    summaryTitle.textContent = "COVID-19 Situation Summary";
+    var policyTitle = document.getElementById("policy-title");
+    policyTitle.textContent = "COVID-19 Policy";
+    var hotspotsTitle = document.getElementById("hotspots-title");
+    hotspotsTitle.textContent = "COVID-19 Hotspots";
+
+    fetch(covidSafetyQuery, {
+        method: "GET",
+        headers:{
+            "Authorization": "Bearer z8z8D1gu46ffgKZHzdpyhT4GGfpJ"
+        },
+        mode:"cors",
+        catch:"default"
+    }).then(function(responseSafety) {
+        return responseSafety.json();
+    }).then(function(dataSafety) {
+        console.log(dataSafety);
+
+        var covidSummary = dataSafety.data.summary;
+        var covidPolicy = dataSafety.data.areaPolicy.text;
+        var covidHotspots = dataSafety.data.hotspots;
+        console.log(covidSummary, covidPolicy, covidHotspots);
+        
+        var summaryEl = document.getElementById("covid-summary");
+        summaryEl.innerHTML = covidSummary;
+        var policyEl = document.getElementById("covid-policy");
+        policyEl.innerHTML = covidPolicy;
+        var hotspotsEl = document.getElementById("covid-hotspots");
+        hotspotsEl.innerHTML = covidHotspots;
+    })
 }
 
 function covidCasesEl(data){
@@ -388,6 +425,7 @@ buttonsDivEl.addEventListener("click", function(event) {
             // currencyEl is the element containg the code for the currency exchange
             currencyEl.textContent = data[0].currencies[0].code;
             Exchangerate(data);
+            safetyInfo(data);
 
             //test function to get COVID-19 data with history buttons
             var covidCasesTitle = document.getElementById("covid-cases-title");
