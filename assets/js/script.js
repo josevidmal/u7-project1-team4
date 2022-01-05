@@ -63,7 +63,12 @@ var restCountriesQuery = "https://restcountries.com/v2/name/" + country;
 
 fetch(restCountriesQuery)
     .then(function (response1) {
+        if (response1.ok) {
+        renderHistoryBtns();
         return response1.json();
+        } else {
+        return;
+        }
     })
     .then(function(data) {
         console.log(data);
@@ -79,10 +84,7 @@ fetch(restCountriesQuery)
 
         //initMap(); call the map
         searchLatLongCity(country,populationFlag);
-
     })
-
-renderHistoryBtns();
 })
 
 function getBasicInfo(data) {
@@ -149,7 +151,7 @@ function safetyInfo(data) {
     fetch(covidSafetyQuery, {
         method: "GET",
         headers:{
-            "Authorization": "Bearer seFi6fW2YBeY97CcStCBib3NbnbE"
+            "Authorization": "Bearer 6xsnVbqTz0mtIlJVz8RsdYA1qkZx"
         },
         mode:"cors",
         catch:"default"
