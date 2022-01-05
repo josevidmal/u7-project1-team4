@@ -149,7 +149,7 @@ function safetyInfo(data) {
     fetch(covidSafetyQuery, {
         method: "GET",
         headers:{
-            "Authorization": "Bearer z8z8D1gu46ffgKZHzdpyhT4GGfpJ"
+            "Authorization": "Bearer seFi6fW2YBeY97CcStCBib3NbnbE"
         },
         mode:"cors",
         catch:"default"
