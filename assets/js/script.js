@@ -148,29 +148,44 @@ function safetyInfo(data) {
     var hotspotsTitle = document.getElementById("hotspots-title");
     hotspotsTitle.textContent = "COVID-19 Hotspots";
 
-    fetch(covidSafetyQuery, {
-        method: "GET",
-        headers:{
-            "Authorization": "Bearer 6xsnVbqTz0mtIlJVz8RsdYA1qkZx"
+    fetch("https://test.api.amadeus.com/v1/security/oauth2/token", {
+        body: "grant_type=client_credentials&client_id=okk9rLWaV8mPJQTKZDh6HyQQIx3UkOzY&client_secret=UlH7ebo3nVVBsSZ9",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
         },
-        mode:"cors",
-        catch:"default"
-    }).then(function(responseSafety) {
-        return responseSafety.json();
-    }).then(function(dataSafety) {
-        console.log(dataSafety);
+        method: "POST"
+    }).then(function(responseToken) {
+        return responseToken.json();
+    }).then(function(dataToken) {
+        console.log(dataToken);
 
-        var covidSummary = dataSafety.data.summary;
-        var covidPolicy = dataSafety.data.areaPolicy.text;
-        var covidHotspots = dataSafety.data.hotspots;
-        console.log(covidSummary, covidPolicy, covidHotspots);
+        var amadeusToken = "Bearer " + dataToken.access_token;
+        console.log(amadeusToken);
+
+        fetch(covidSafetyQuery, {
+            method: "GET",
+            headers:{
+                "Authorization": amadeusToken
+            },
+            mode:"cors",
+            catch:"default"
+        }).then(function(responseSafety) {
+            return responseSafety.json();
+        }).then(function(dataSafety) {
+            console.log(dataSafety);
+
+            var covidSummary = dataSafety.data.summary;
+            var covidPolicy = dataSafety.data.areaPolicy.text;
+            var covidHotspots = dataSafety.data.hotspots;
+            console.log(covidSummary, covidPolicy, covidHotspots);
         
-        var summaryEl = document.getElementById("covid-summary");
-        summaryEl.innerHTML = covidSummary;
-        var policyEl = document.getElementById("covid-policy");
-        policyEl.innerHTML = covidPolicy;
-        var hotspotsEl = document.getElementById("covid-hotspots");
-        hotspotsEl.innerHTML = covidHotspots;
+            var summaryEl = document.getElementById("covid-summary");
+            summaryEl.innerHTML = covidSummary;
+            var policyEl = document.getElementById("covid-policy");
+            policyEl.innerHTML = covidPolicy;
+            var hotspotsEl = document.getElementById("covid-hotspots");
+            hotspotsEl.innerHTML = covidHotspots;
+        })
     })
 }
 
