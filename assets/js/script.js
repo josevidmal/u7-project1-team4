@@ -86,7 +86,10 @@ fetch(restCountriesQuery)
 
         //initMap(); call the map
         searchLatLongCity(country,populationFlag);
-    })
+    });
+
+    topFunction();
+
 })
 
 function getBasicInfo(data) {
@@ -490,5 +493,14 @@ buttonsDivEl.addEventListener("click", function(event) {
     displayInfoBoxEl.setAttribute("style", "visibility: visible");
     searchBoxEl.setAttribute("style", "position: static");
     
+    topFunction();
 
 });
+
+
+function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    //inputDestination.value = "";
+    //document.getElementById('inputDestination').value = "";
+  }
