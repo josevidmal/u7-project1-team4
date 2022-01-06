@@ -79,6 +79,7 @@ fetch(restCountriesQuery)
         asideSectionEl[i].setAttribute("style", "visibility: visible");
         }
         displayInfoBoxEl.setAttribute("style", "visibility: visible");
+        searchBoxEl.setAttribute("style", "position: static");
 
         populationFlag = data[0].population;
         console.log('population: ',populationFlag);
