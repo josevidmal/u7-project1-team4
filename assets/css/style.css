@@ -5,19 +5,24 @@
 .header {
     padding: 20px;
     text-align: center;
-    color: black;
+    color: white;
     font-size: 30px;
     background-image: linear-gradient(
         to top,
-        rgb(255, 119, 40) 0%,
-        rgba(255, 119, 40, 0.74)
+        rgb(0, 0, 0) 0%,
+        rgba(53, 53, 53, 0.74)
     );
     border-bottom: solid 5px black;
 }
 
 main {
     background-image: url("../images/Trip-planning-2.png");
-    background-size: 700px;
+    /* background-image: url("../images/fondoDos.jpg"); */
+    background-size: cover;
+        -moz-background-size: cover;
+        -webkit-background-size: cover;
+        -o-background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .container-custom {
@@ -37,7 +42,8 @@ main {
         rgb(0, 0, 0) 0%,
         rgba(53, 53, 53, 0.74)
     );
-    border-top: solid 5px rgb(255, 119, 40);
+    border-top: solid 5px white;
+    bottom:0;
   }
 
 .aside-boxes{
@@ -46,11 +52,12 @@ main {
     border:solid 1px;
     margin-top:5px;
     margin-bottom:5px;
-    background-image: linear-gradient(
-        to top,
-        rgb(99, 98, 98) 0%,
-        rgba(197, 197, 197, 0.74)
-    );
+   background-image: radial-gradient(circle at -20.71% 50%, #fcf2f4 0, #f0ebec 25%, #e4e4e4 50%, #d8dddc 75%, #cdd6d3 100%);
+
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+
 }
 
 .aside-section{
@@ -59,6 +66,7 @@ main {
     justify-content: space-around;
     flex-direction: column;
     visibility: hidden;
+    justify-content: flex-start;
 }
 
 .form-custom{
@@ -123,4 +131,8 @@ main {
 
 .history-btns:active {
     box-shadow: 0px 0px 10px 5px deepskyblue;
+}
+
+nav{
+    color:white !important;
 }

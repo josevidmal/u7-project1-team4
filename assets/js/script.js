@@ -138,6 +138,12 @@ function Exchangerate(data){
 
 //Function to get covid situation summary, covid policy and covid hotspots
 function safetyInfo(data) {
+
+    //Fectch to obtain the token and access token
+    
+
+
+
     var countryCode = data[0].alpha2Code;
     var covidSafetyQuery = "https://test.api.amadeus.com/v1/duty-of-care/diseases/covid19-area-report?countryCode=" + countryCode;
 
