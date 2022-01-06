@@ -10,7 +10,7 @@ The user can type in a country to search for. The website has a built-in autocom
 
 ### Website Appearance 
 
-![Website screenshot](./assets/images/page.gif)
+![Website screenshot](./assets/images/webpage.png)
 
 ### [Published Site](https://josevidmal.github.io/u7-project1-team4/)
 
@@ -50,4 +50,4 @@ Team members:
 
 ### Roadmap
 
-This website allows for many different features to be implemented in the future, where we can keep adding sections to provide more information for travelers. We hope to keep expanding the project to include things like a clock to display local time, travel tips, suggested destinations, etc. all to contribute for an easier planning and give the user the base to start planning a trip.
+This website allows for many different features to be implemented in the future, where we can keep adding sections to provide more information for travelers. We hope to keep expanding the project to include things like travel tips, suggested destinations, etc. all to contribute for an easier planning and give the user the base to start planning a trip.
