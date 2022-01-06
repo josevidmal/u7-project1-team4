@@ -14,9 +14,9 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@500&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="assets/css/style.css" />
         <link rel="stylesheet" href="assets/css/jquery-ui.css" />
         <Title>Safe Trip Planer</Title>
@@ -57,27 +57,6 @@
                 
                 <section class="cell medium-6 container-custom"> <!-- section information in the center-->                    
 
-                    <div class="form-custom">
-                      <form class="grid-x">
-                        <div class="grid-container">
-                          <div class="grid-x grid-padding-x">
-                            <div class="medium-11 cell">
-                              <label>Destination (Country):
-                                <input type="text" placeholder="Select a Country" id="inputDestination">
-                              </label>
-                            </div>
-                            <div class="cell">
-                                <button type="submit" class="button primary">Search</button>
-                            </div>                                                     
-                          </div>
-                        </div>                                              
-                      </form>
-                      
-                      <div id="buttons-div">
-                        <!-- History buttons go here -->
-                      </div>  
-                    </div>
-
                     <div class="display-information-box">
                         <div id="mapi" style="display:none"><!-- div for google map api-->
 
@@ -88,6 +67,27 @@
                         <p id="covid-policy">We help you to determine your budget for your next holidays</p>
                         <h3 id="hotspots-title"></h3>
                         <p id="covid-hotspots">We care about your wellness and safety so check the covid levels with our calculator</p>
+                    </div>
+
+                    <div class="form-custom">
+                        <form class="grid-x">
+                          <div class="grid-container">
+                            <div class="grid-x grid-padding-x">
+                              <div class="medium-11 cell">
+                                <label>Destination (Country):
+                                  <input type="text" placeholder="Select a Country" id="inputDestination">
+                                </label>
+                              </div>
+                              <div class="cell">
+                                  <button type="submit" class="button primary">Search</button>
+                              </div>                                                     
+                            </div>
+                          </div>                                              
+                        </form>
+                        
+                        <div id="buttons-div">
+                          <!-- History buttons go here -->
+                        </div>  
                     </div>
                     
                 </section><!-- end section information in the center-->

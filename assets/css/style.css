@@ -1,5 +1,9 @@
-*, h1, h2, h3, h4 {
-    font-family: 'Righteous', cursive;
+*, h1, h2, h3 {
+    font-family: 'Spartan', sans-serif;
+}
+
+body {
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .header {
@@ -23,6 +27,8 @@ main {
         -webkit-background-size: cover;
         -o-background-size: cover;
     background-repeat: no-repeat;
+    background-color: rgba(255, 255, 255, 0.6);
+    background-blend-mode: lighten;
 }
 
 .container-custom {
@@ -33,10 +39,12 @@ main {
 }
 
 .footer {
+    height: 100px;
     padding: 20px;
     text-align: center;
     color: white;
-    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
     background-image: linear-gradient(
         to top,
         rgb(0, 0, 0) 0%,
@@ -44,7 +52,7 @@ main {
     );
     border-top: solid 5px white;
     bottom:0;
-  }
+}
 
 .aside-boxes{
     padding:5px;
@@ -70,6 +78,8 @@ main {
 }
 
 .form-custom{
+    position: relative;
+    top: -150px;
     padding:5px;
     background:#e0e0e0;
     border-radius:5px;
@@ -84,7 +94,7 @@ main {
     background:#e0e0e0;
     border-radius:5px;
     border:solid 1px;
-    margin-top:5px;
+    margin-top:1px;
     margin-bottom:5px;
     visibility: hidden;
 }

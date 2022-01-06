@@ -10,6 +10,7 @@ var mapiDiv = document.getElementById("mapi");
 var buttonsDivEl = document.getElementById("buttons-div");
 var asideSectionEl = document.querySelectorAll(".aside-section");
 var displayInfoBoxEl = document.querySelector(".display-information-box");
+var searchBoxEl = document.querySelector(".form-custom");
 var covidDeathsFlag = "";
 var populationFlag = "";
 
@@ -486,4 +487,7 @@ buttonsDivEl.addEventListener("click", function(event) {
         asideSectionEl[i].setAttribute("style", "visibility: visible");
     }
     displayInfoBoxEl.setAttribute("style", "visibility: visible");
+    searchBoxEl.setAttribute("style", "position: static");
+    
+
 });

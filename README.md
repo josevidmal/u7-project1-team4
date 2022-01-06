@@ -10,7 +10,7 @@ The user can type in a country to search for. The website has a built-in autocom
 
 ### Website Appearance 
 
-![Website screenshot](./assets/images/page.png)
+![Website screenshot](./assets/images/page.gif)
 
 ### [Published Site](https://josevidmal.github.io/u7-project1-team4/)
 
