@@ -156,7 +156,7 @@ function safetyInfo(data) {
     hotspotsTitle.textContent = "COVID-19 Hotspots";
 
     fetch("https://test.api.amadeus.com/v1/security/oauth2/token", {
-        body: "grant_type=client_credentials&client_id=okk9rLWaV8mPJQTKZDh6HyQQIx3UkOzY&client_secret=UlH7ebo3nVVBsSZ9",
+        body: "grant_type=client_credentials&client_id=yD1Et9oUnZXdnrROesMmfbAbIMl4DWkU&client_secret=TgMAAcf0nDWfiaNt",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"
         },
@@ -192,7 +192,7 @@ function safetyInfo(data) {
             policyEl.innerHTML = covidPolicy;
             var hotspotsEl = document.getElementById("covid-hotspots");
             if (covidHotspots === undefined) {
-                hotspotsEl.textContent = "There are no hotspots reported at this moment"
+                hotspotsEl.textContent = "There are no hotspots reported at this moment."
             } else {
             hotspotsEl.innerHTML = covidHotspots;
             }
@@ -200,13 +200,13 @@ function safetyInfo(data) {
     })
 }
 
-function covidCasesEl(data){
+/*function covidCasesEl(data){
     var covidData = "https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/ncov_cases2_v1/FeatureServer/2/query?where=1%3D1&outFields=Country_Region,Last_Update,UID,ISO3,Confirmed&outSR=4326&f=json"
     fetch(covidData)
     .then(function(responsecovidcases) {
         return covidCasesEl.json();
     })
-}
+}*/
 
 
 function searchLatLongCity(city,population){
